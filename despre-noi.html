@@ -3,18 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Despre Noi</title>
+    <title>Serviciul Județean de Ambulanță Replay</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
         }
-        header, footer {
-            background: #003366;
+        header {
+            background: #0073e6;
             color: white;
+            padding: 10px 20px;
             text-align: center;
-            padding: 10px 0;
+        }
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            background: #003366;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 20px;
         }
         .large-image {
             width: 100%;
@@ -26,24 +45,46 @@
             font-size: 24px;
             color: #555;
         }
-        .content {
-            padding: 20px;
+        .text-sections {
+            margin-top: 20px;
+        }
+        .text-sections h2 {
+            color: #003366;
+        }
+        .text-sections p {
+            margin: 10px 0;
+        }
+        footer {
+            background: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Despre Noi</h1>
+        <h1>Serviciul Județean de Ambulanță Replay</h1>
     </header>
-    <div class="large-image">
-        <p>(Aici va fi o imagine adăugată ulterior)</p>
-    </div>
-    <div class="content">
-        <h2>Echipa Noastră</h2>
-        <p>Aici poți adăuga informații despre echipa SAJ.</p>
-    </div>
+    <nav>
+        <a href="acasa.html">Acasă</a>
+        <a href="despre-noi.html">Despre Noi</a>
+        <a href="aplicatii-saj.html">Aplicații SAJ</a>
+        <a href="conducere.html">Conducere</a>
+        <a href="preturi.html">Prețuri</a>
+        <a href="anunturi.html">Anunțuri</a>
+    </nav>
+    <main>
+        <div class="large-image">
+            <p>(Aici va fi o imagine adăugată ulterior)</p>
+        </div>
+        <div class="text-sections">
+            <h2>Rubrici</h2>
+            <p>Aici poți adăuga text sau informații suplimentare despre SAJ.</p>
+        </div>
+    </main>
     <footer>
         <p>&copy; 2024 Serviciul Județean de Ambulanță Replay</p>
     </footer>
-</body>
 </html>
