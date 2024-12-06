@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Serviciul Județean de Ambulanță Replay</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -35,24 +36,46 @@
             main {
                 padding: 20px;
             }
-            .large-image {
+            .form-container {
+                background-color: rgba(255, 255, 255, 0.9);
+                border: 2px solid #0073e6;
+                border-radius: 10px;
+                padding: 20px 30px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                max-width: 600px;
+                margin: auto;
+            }
+            label {
+                display: block;
+                margin: 10px 0 5px;
+                color: #333;
+                font-weight: bold;
+            }
+            input[type="text"],
+            input[type="number"],
+            textarea,
+            select {
                 width: 100%;
-                height: 300px;
-                background: #ccc;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 24px;
-                color: #555;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-bottom: 15px;
             }
-            .text-sections {
-                margin-top: 20px;
+            textarea {
+                resize: none;
             }
-            .text-sections h2 {
-                color: #003366;
+            input[type="submit"] {
+                background-color: #0073e6;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                width: 100%;
             }
-            .text-sections p {
-                margin: 10px 0;
+            input[type="submit"]:hover {
+                background-color: #005bb5;   
             }
             footer {
                 background: #003366;
@@ -69,166 +92,183 @@
         </header>
         <nav>
             <a href="acasa.html">Acasă</a>
-            <a href="despre-noi.html">Despre Noi</a>
-            <a href="aplicatii-saj.html">Aplicații SAJ</a>
             <a href="conducere.html">Conducere</a>
-            <a href="preturi.html">Prețuri</a>
+            <a href="aplicatii-saj.html">Aplicații SAJ</a>
             <a href="anunturi.html">Anunțuri</a>
+            <a href="despre-noi.html">Despre Noi</a>
+            <a href="preturi.html">Prețuri</a>
         </nav>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicații SAJ</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: url('images/saj.png') no-repeat center center fixed;
-            background-size: cover; /* Asigură că imaginea acoperă întreaga zonă disponibilă */
-            background-position: center center; /* Poziționează imaginea în centrul ecranului */
-            height: 100vh;
-        }
-        .wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .form-container {
-            background-color: rgba(255, 255, 255, 0.9); /* Fundal semi-transparent */
-            border: 2px solid #0073e6;
-            border-radius: 10px;
-            padding: 20px 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-        }
-        .form-container h1 {
-            text-align: center;
-            color: #0073e6;
-            margin-bottom: 20px;
-        }
-        .form-container h2 {
-            color: #003366;
-            margin-top: 20px;
-            border-bottom: 1px solid #0073e6;
-            padding-bottom: 5px;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            color: #333;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        textarea {
-            resize: none;
-        }
-        input[type="submit"] {
-            background-color: #0073e6;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-        }
-        input[type="submit"]:hover {
-            background-color: #005bb5;
-        }
-    </style>
-</head>
-<body>
-    <div class="wrapper">
-        <div class="form-container">
-            <h1>Formular Aplicații SAJ</h1>
-            <form action="aplicatii-saj/aplicatii.php" method="post"> <!-- Acum formularul trimite datele la procesorul PHP -->
-                <!-- Secțiunea IC -->
-                <h2>Informații IC</h2>
-                <label for="nume">Nume și prenume:</label>
-                <input type="text" id="nume" name="nume" required>
+        <main>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Aplicații SAJ</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 0;
+                        padding: 0;
+                        background: url('images/lobby.png') no-repeat center center fixed;
+                        background-size: cover; /* Asigură că imaginea acoperă întreaga zonă disponibilă */
+                        background-position: center center; /* Poziționează imaginea în centrul ecranului */
+                        height: 100vh;
+                    }
+                    .wrapper {
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-start;
+                        min-height: 100vh;
+                        padding: 20px;
+                    }
+                    .form-container {
+                        background-color: rgba(255, 255, 255, 0.9); /* Fundal semi-transparent */
+                        border: 2px solid #0073e6;
+                        border-radius: 10px;
+                        padding: 20px 30px;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                        max-width: 600px;
+                        width: 100%;
+                    }
+                    .form-container h1 {
+                        text-align: center;
+                        color: #0073e6;
+                        margin-bottom: 20px;
+                    }
+                    .form-container h2 {
+                        color: #003366;
+                        margin-top: 20px;
+                        border-bottom: 1px solid #0073e6;
+                        padding-bottom: 5px;
+                    }
+                    label {
+                        display: block;
+                        margin: 10px 0 5px;
+                        color: #333;
+                        font-weight: bold;
+                    }
+                    input[type="text"],
+                    input[type="number"],
+                    textarea,
+                    select {
+                        width: 100%;
+                        padding: 10px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        margin-bottom: 15px;
+                    }
+                    textarea {
+                        resize: none;
+                    }
+                    input[type="submit"] {
+                        background-color: #0073e6;
+                        color: white;
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-size: 16px;
+                        width: 100%;
+                    }
+                    input[type="submit"]:hover {
+                        background-color: #005bb5;
+                    }
+                </style>
+            </head>
+            <body>
+            <div class="form-container">
+                <h1>Formular Aplicații SAJ</h1>
+                <form id="applicationForm">
+                    <!-- Secțiunea IC -->
+                    <h2>Informații IC</h2>
+                    <label for="nume">Nume și prenume:</label>
+                    <input type="text" id="nume" name="nume" required>
 
-                <label for="varsta">Vârsta:</label>
-                <input type="number" id="varsta" name="varsta" min="0" required>
+                    <label for="varsta">Vârsta:</label>
+                    <input type="number" id="varsta" name="varsta" min="0" required>
 
-                <label for="cnp">CNP-ul (ID):</label>
-                <input type="text" id="cnp" name="cnp" required>
+                    <label for="cnp">CNP-ul (ID):</label>
+                    <input type="text" id="cnp" name="cnp" required>
 
-                <label for="sex">Sex:</label>
-                <select id="sex" name="sex" required>
-                    <option value="Masculin">Masculin</option>
-                    <option value="Feminin">Feminin</option>
-                    <option value="Altul">Altul</option>
-                </select>
+                    <label for="sex">Sex:</label>
+                    <select id="sex" name="sex" required>
+                        <option value="">Selectează</option>
+                        <option value="Masculin">Masculin</option>
+                        <option value="Feminin">Feminin</option>
+                        <option value="Altul">Altul</option>
+                    </select>
 
-                <label for="motiv">De ce dorești să intri în echipa SAJ?</label>
-                <textarea id="motiv" name="motiv" rows="4" required></textarea>
+                    <label for="motiv">De ce dorești să intri în echipa SAJ?</label>
+                    <textarea id="motiv" name="motiv" rows="4" required></textarea>
 
-                <label for="alegere">Ce te face să crezi că ești o alegere bună pentru noi?</label>
-                <textarea id="alegere" name="alegere" rows="4" required></textarea>
+                    <label for="alegere">Ce te face să crezi că ești o alegere bună pentru noi?</label>
+                    <textarea id="alegere" name="alegere" rows="4" required></textarea>
 
-                <label for="apt">Sunteți apt fizic/moral pentru acest job?</label>
-                <select id="apt" name="apt" required>
-                    <option value="Da">Da</option>
-                    <option value="Nu">Nu</option>
-                </select>
+                    <label for="apt">Sunteți apt fizic/moral pentru acest job?</label>
+                    <select id="apt" name="apt" required>
+                        <option value="">Selectează</option>
+                        <option value="Da">Da</option>
+                        <option value="Nu">Nu</option>
+                    </select>
 
-                <label for="descriere">Descriere personală / poveste de viață (minim 150 de cuvinte):</label>
-                <textarea id="descriere" name="descriere" rows="5" required></textarea>
+                    <label for="descriere">Descriere personală / poveste de viață (minim 150 de cuvinte):</label>
+                    <textarea id="descriere" name="descriere" rows="5" required></textarea>
 
-                <!-- Secțiunea OOC -->
-                <h2>Informații OOC</h2>
-                <label for="nume_ooc">Numele și prenumele:</label>
-                <input type="text" id="nume_ooc" name="nume_ooc" required>
+                    <!-- Secțiunea OOC -->
+                    <h2>Informații OOC</h2>
+                    <label for="nume_ooc">Numele și prenumele:</label>
+                    <input type="text" id="nume_ooc" name="nume_ooc" required>
 
-                <label for="varsta_ooc">Vârsta (minim 15 ani):</label>
-                <input type="number" id="varsta_ooc" name="varsta_ooc" min="15" required>
+                    <label for="varsta_ooc">Vârsta (minim 15 ani):</label>
+                    <input type="number" id="varsta_ooc" name="varsta_ooc" min="15" required>
 
-                <label for="ore_server">Câte ore ai pe server?</label>
-                <input type="number" id="ore_server" name="ore_server" required>
+                    <label for="ore_server">Câte ore ai pe server?</label>
+                    <input type="number" id="ore_server" name="ore_server" required>
 
-                <label for="ore_pe_zi">Câte ore poți acorda serverului pe zi?</label>
-                <input type="number" id="ore_pe_zi" name="ore_pe_zi" required>
+                    <label for="ore_pe_zi">Câte ore poți acorda serverului pe zi?</label>
+                    <input type="number" id="ore_pe_zi" name="ore_pe_zi" required>
 
-                <label for="inactivitate">Ești conștient că dacă ai 3 zile de inactivitate fără a anunța vei fi dat afară?</label>
-                <select id="inactivitate" name="inactivitate" required>
-                    <option value="Da">Da</option>
-                    <option value="Nu">Nu</option>
-                </select>
+                    <label for="inactivitate">Ești conștient că dacă ai 3 zile de inactivitate fără a anunța vei fi dat afară?</label>
+                    <select id="inactivitate" name="inactivitate" required>
+                        <option value="">Selectează</option>
+                        <option value="Da">Da</option>
+                        <option value="Nu">Nu</option>
+                    </select>
 
-                <label for="regulament">Ai citit regulamentul SAJ?</label>
-                <select id="regulament" name="regulament" required>
-                    <option value="Da">Da</option>
-                    <option value="Nu">Nu</option>
-                </select>
+                    <label for="regulament">Ai citit regulamentul SAJ?</label>
+                    <select id="regulament" name="regulament" required>
+                        <option value="">Selectează</option>
+                        <option value="Da">Da</option>
+                        <option value="Nu">Nu</option>
+                    </select>
 
-                <label for="factiuni">În ce facțiuni ai mai fost?</label>
-                <input type="text" id="factiuni" name="factiuni" required>
+                    <label for="factiuni">În ce facțiuni ai mai fost?</label>
+                    <input type="text" id="factiuni" name="factiuni" required>
 
-                <label for="timp_fivem">De cât timp joci FiveM?</label>
-                <input type="text" id="timp_fivem" name="timp_fivem" required>
+                    <label for="timp_fivem">De cât timp joci FiveM?</label>
+                    <input type="text" id="timp_fivem" name="timp_fivem" required>
 
-                <label for="descriere_ooc">Descrie-te în câteva cuvinte:</label>
-                <textarea id="descriere_ooc" name="descriere_ooc" rows="4" required></textarea>
+                    <label for="descriere_ooc">Descrie-te în câteva cuvinte:</label>
+                    <textarea id="descriere_ooc" name="descriere_ooc" rows="4" required></textarea>
 
-                <!-- Submit -->
-                <input type="submit" value="Trimite Aplicația">
-            </form>
-        </div>
-    </div>
-    <footer>
-        <p>&copy; 2024 Serviciul Județean de Ambulanță Replay</p>
-    </footer>
+                    <input type="submit" value="Trimite Aplicația">
+                </form>
+            </div>
+        </main>
+        <script>
+            document.getElementById("applicationForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const data = [["Câmp", "Valoare"]];
+                formData.forEach((value, key) => data.push([key, value]));
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.aoa_to_sheet(data);
+                XLSX.utils.book_append_sheet(wb, ws, "Aplicație SAJ");
+                XLSX.writeFile(wb, "aplicatie_saj.xlsx");
+                alert("Aplicația a fost trimisă!");
+            });
+        </script>
+        <footer>
+            <p>&copy; 2024 Serviciul Județean de Ambulanță Replay</p>
+        </footer>
+    </body>
 </html>
